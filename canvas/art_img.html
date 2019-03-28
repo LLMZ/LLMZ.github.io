@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>艺术画廊</title>
+    <style type="text/css">
+        body {
+            background: 0 -100px repeat-x url(img/bg_gallery.png) #4F191A;
+            margin: 10px;
+        }
+
+        img {
+            display: none;
+        }
+        .left{
+            width: 530px;
+            height: 370px;
+            font-size: 68px;
+            font-family: "微软雅黑 Light";
+            float: left;
+            line-height: 300px;
+            text-align: center;
+        }
+        .right{
+            width: 400px;
+            height: 370px;
+            font-size: 68px;
+            font-family: "微软雅黑 Light";
+            float: right;
+            line-height: 300px;
+            text-align: center;
+        }
+        table {
+            float: left;
+        }
+
+        td {
+            padding: 15px;
+        }
+
+    </style>
+</head>
+<body  onload="draw();">
+<div class="left">艺术</div>
+<table>
+    <tr>
+        <td><img src="img/gallery_1.jpg"></td>
+        <td><img src="img/gallery_2.jpg"></td>
+        <td><img src="img/gallery_3.jpg"></td>
+        <td><img src="img/gallery_4.jpg"></td>
+    </tr>
+    <tr>
+        <td><img src="img/gallery_5.jpg"></td>
+        <td><img src="img/gallery_6.jpg"></td>
+        <td><img src="img/gallery_7.jpg"></td>
+        <td><img src="img/gallery_8.jpg"></td>
+    </tr>
+</table>
+<div class="right">画廊</div>
+<img id="frame" src="img/Canvas_picture_frame.png" width="132" height="150">
+</body>
+<script>
+    function draw() {
+        // Loop through all images
+        for (var i = 0; i < document.images.length; i++) {
+            // Don't add a canvas for the frame image
+            if (document.images[i].getAttribute('id') != 'frame') {
+
+                // Create canvas element
+                canvas = document.createElement('canvas');
+                canvas.setAttribute('width', 132);
+                canvas.setAttribute('height', 150);
+
+                // Insert before the image
+                document.images[i].parentNode.insertBefore(canvas,document.images[i]);
+
+                ctx = canvas.getContext('2d');
+
+                // Draw image to canvas
+                ctx.drawImage(document.images[i], 15, 20);
+
+                // Add frame
+                ctx.drawImage(document.getElementById('frame'), 0, 0);
+            }
+        }
+    }
+</script>
+</html>
