@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+                <meta charset="UTF-8">
+                <title>Canvas学习</title>
+                <style type="text/css">
+                *{
+                  padding: 0px;
+                  margin: 0px;
+                }
+                body{
+                  background-color: black;
+                }
+                                canvas{
+                                        border: 1px solid;
+                                }
+                </style>
+ </head>
+ <body >
+                <canvas  id="canvas"></canvas>
+ </body>
+ <script >
+                  // 使用DOM方法得到画布 
+                var mycanvas=document.getElementById('canvas');
+                //使用画布的上下文
+                var ctx=mycanvas.getContext("2d");
+              //设置画布满屏
+              canvas.width=document.documentElement.clientWidth;
+              canvas.height=document.documentElement.clientHeight;
+              //小球类
+              function Ball(x,y){
+                    this.x=x;     //圆心坐标x
+                    this.y=y;     //圆心坐标y
+                    this.r=30;   //半径
+                    this.color="rgba("+parseInt(Math.random()*256)+","+parseInt(Math.random()*256)+","+parseInt(Math.random()*256)+",0.8)";  //颜色随机加透明度0.8
+                    this.dx=parseInt(Math.random()*18)-9;      //x的变化值
+                    this.dy=parseInt(Math.random()*18)-9;   //y的变化值
+                    ballsArr.push(this);//让自己进入数组
+              }
+
+              Ball.prototype.update=function(){
+                      this.x+=this.dx;
+                      this.y+=this.dy;
+                      this.r --;
+                      if(this.r<0){
+                          this.godie();
+                      }
+              }
+
+              Ball.prototype.render=function(){
+                      ctx.beginPath();
+                      ctx.arc(this.x,this.y,this.r,0,Math.PI*2,true);
+                      ctx.closePath();
+                      ctx.fillStyle=this.color;
+                      ctx.fill();
+              }
+
+              Ball.prototype.godie=function(){
+                   for(var i=0; i<ballsArr.length;i++){
+                        if(ballsArr[i]==this){
+                              ballsArr.splice(i,1);
+                        }
+                   }
+              }
+              //小球数组
+              var ballsArr=[];
+              //监听
+              canvas.onmousemove=function(event){
+                  new Ball(event.clientX,event.clientY);
+                //定时器
+              }
+              setInterval(function(){
+                //清屏
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                //渲染、更新所有小球
+                 for(var i=0; i<ballsArr.length;i++){
+                  //因为update可能会删除这个小球（半径小于0），所以要验证这个小球是否存在
+                        ballsArr[i]&&ballsArr[i].render();
+                      ballsArr[i].update();
+                        }
+              
+              },20);
+ </script>
+</html>
