@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+                <meta charset="UTF-8">
+                <title>Canvas学习</title>
+                <style type="text/css">
+                                canvas{
+                                        border: 1px solid;
+                                }
+                </style>
+ </head>
+ <body >
+                <canvas  width="600" height="500" id="canvas"></canvas>
+ </body>
+ <script >
+                  // 使用DOM方法得到画布 
+                var mycanvas=document.querySelector('canvas');
+                //使用画布的上下文
+                var ctx=mycanvas.getContext("2d");
+              //创建一个img对象的孤儿节点
+              var image=new Image();
+              image.src="img/gril.png";
+              //一定要等到这个图片loading之后，然后再渲染它
+
+              var step=0;
+              var m=0;
+              var x1=100;
+              var x2=800;
+              image.onload=function(){
+                  setInterval(function(){
+                    //清屏
+                    ctx.clearRect(0,0,600,500);
+                    step++;
+                    m++
+                    if(step>3){
+                      step=0;
+                    }
+                    x1+=4;
+                    x2=x2-4;
+                    var a=100-m;
+                      console.log(m);
+                      console.log("--------------");
+                    console.log(a);
+                    if(a>0){
+                        ctx.drawImage(image,79*step,108*2,79,108,x1,100,79,108);
+                    }
+                    else{
+                        ctx.drawImage(image,79*step,108*4,79,108,x2,100,79,108);
+                    }
+
+                  },150);
+              }
+ </script>
+</html>

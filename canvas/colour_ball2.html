@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+                <meta charset="UTF-8">
+                <title>Canvas学习</title>
+                <style type="text/css">
+                                canvas{
+                                        border: 1px solid;
+                                        background: black;
+                                }
+                </style>
+ </head>
+ <body >
+                <canvas id="canvas"></canvas>
+ </body>
+ <script >
+                  // 使用DOM方法得到画布 
+                var mycanvas=document.getElementById('canvas');
+                //使用画布的上下文
+                var ctx=mycanvas.getContext("2d");
+                  //设置画布满屏
+                  canvas.width=document.documentElement.clientWidth;
+                  canvas.height=document.documentElement.clientHeight;
+              //构造函数，圆类
+              function Ball(x,y,r,speed,color){
+                this.x=x;//坐标x
+                this.y=y;//坐标y
+                this.r=r;//半径
+                this.speed=speed;//速度
+                this.color=color;//颜色
+                //将自己推入数组
+                actorsArr.push(this);
+              }
+              //渲染方法
+              Ball.prototype.render=function(){
+                ctx.beginPath();
+                ctx.arc(this.x,this.y,this.r,0,Math.PI*2,true);
+                ctx.closePath();
+                ctx.fillStyle=this.color;
+                ctx.fill();
+              }
+              //更新方法
+              Ball.prototype.update=function(){
+                    this.x+=this.speed;
+                    this.y+=this.speed;
+              }
+              //演员数组
+              var actorsArr=[];
+              //实例化一些小球，他们都可以自动动画
+              new Ball(150,50,10,1,"red");
+              new Ball(150,100,15,2,"pink");
+              new Ball(150,150,15,3,"#f60");
+              new Ball(100,200,25,4,"blue");
+              new Ball(100,240,27,5,"yellow");
+              new Ball(100,280,30,6,"orange");
+              new Ball(100,320,40,7,"green");
+              //帧编号
+              var fno=0;
+                //唯一的一个定时器
+              setInterval(function(){
+                //清屏
+                 ctx.clearRect(0,0,canvas.height,canvas.width);
+                 //打印帧编号
+                 fno++;
+
+                 ctx.fillStyle="#fff";//设置字体颜色
+                ctx.fillText("帧编号："+fno,50,50);
+                  //更新、渲染所有演员
+                  for(var i=0;i<actorsArr.length;i++){
+                            actorsArr[i].update();
+                            actorsArr[i].render();
+                  }
+              },600)
+ </script>
+</html>
