@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+              <meta charset="UTF-8/">
+              <title>index</title>
+               <style>
+                            *{
+                                  font-family:微软雅黑;
+                            }
+                            .clock{
+                              width:400px;
+                              height:50px;
+                              background: #000;
+                              color:#0f0;
+                              font-weight:bold;
+                              border-radius: 50px;
+                              text-align: center;
+                              line-height: 50px;
+                              font-size: 30px;
+                            }
+               </style>
+ </head>
+ <body>
+      <div class="clock">
+                   <span id='sid'>16:32</span>
+      </div>
+ </body>
+ <script>
+ 	//日期对象
+  function getDate(){
+dobj=new Date();
+  year=dobj.getFullYear();
+  month=dobj.getMonth()+1;
+  day=dobj.getDate();
+  hour=dobj.getHours();
+  minute=dobj.getMinutes();
+  second=dobj.getSeconds();
+if(month<10){
+  month='0'+month;
+}
+if(day<10){
+  day='0'+day;
+}
+if(hour<10){
+  hour='0'+hour;
+}
+if(minute<10){
+  minute='0'+minute;
+}
+if(second<10){
+  second='0'+second;
+}
+  str=year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
+sidobj=document.getElementById('sid');
+//alert(sidobj)
+sidobj.innerHTML=str;
+  }
+  getDate();
+  setInterval(function(){
+    getDate();
+  },1000);
+  //setTimeOut()
+ </script>
+ </html>

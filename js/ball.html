@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset ="UTF-8">
+<title>index</title>
+<style>
+*{
+	font-family:微软雅黑；
+	margin:0px;
+	padding: 0px;
+}
+#imgid{
+	width:128px;
+	height: 128px;
+	position: absolute;
+	top:0px;
+	left: 0px;
+	overflow: hidden;
+	
+}
+/*#imgid img{
+	display: block;
+} *//*用overflow或这种方法防止div里的图片撑破div
+</style>
+</head>
+<body>
+	<div id=imgid>
+		<img src="fb.png" >
+	</div>
+</body>
+<script>
+	imgobj=document.getElementById('imgid');
+	//可视区域的高
+	screenHeight=document.documentElement.clientHeight;
+	imgHeight=128;
+	diffHeight=screenHeight-imgHeight;
+	//可视区域的宽
+	screenWidth=document.documentElement.clientWidth;
+	imgWidth=128;
+	diffWidth=screenWidth-imgWidth;
+	xs=0;
+	xv=10;
+	ys=0;
+	yv=10;
+	setInterval(function(){
+		ys+=yv;
+		if(ys>=diffHeight){
+			ys=diffHeight;
+			yv=-yv;
+		}if(ys<=0){
+			yv=-yv;
+		}
+		document.title=ys+'-'+diffHeight;
+		imgobj.style.top=ys+'px';
+	xs+=xv;
+	if(xs>=diffWidth){
+		xs=diffWidth;
+		xv=-xv;
+	}if(xs<=0){
+		xv=-xv;
+	}
+	imgobj.style.left=xs+'px';
+	},20);
+</script>
+</html>

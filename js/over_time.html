@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+              <meta charset="UTF-8/">
+              <title>index</title>
+               <style>
+                            *{
+                                  font-family:微软雅黑;
+                            }
+                            .clock{
+                              width:100%px;
+                              height:50px;
+                              background: #000;
+                              color:#0f0;
+                              font-weight:bold;
+                              border-radius: 50px;
+                              text-align: center;
+                              line-height: 50px;
+                              font-size: 20px;
+                            }
+                      
+               </style>
+ </head>
+ <body>
+      <div class="clock">
+                   <span>提交成功,<span id='sid'>6</span>秒钟页面将跳转到百度</span>
+      </div>
+  <button id='bid'>立即停止</button>
+ </body>
+ <script>
+      sidobj=document.getElementById('sid');
+ 	bidobj=document.getElementById('bid');
+  s=6;
+  // if(s>0){
+  //   s--;
+  //   sidobj.innerHTML=s;
+  // }
+       sobj=setInterval(function(){
+        sidobj.innerHTML=--s;
+        if(s<0){
+           sidobj.innerHTML=0;
+        }
+       },1000)
+   tobj=setTimeout(function(){
+          location='http://www.baidu.com';
+          sidobj.innerHTML=0;
+       },6000);
+   bidobj.onclick=function(){
+    clearTimeout(tobj);
+   }
+ </script>
+ </html>
