@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+              <meta charset="UTF-8/">
+              <title>index</title>
+               <style>
+                    *{
+                      margin:0px;
+                      padding:0px;
+                    }
+               #flash{
+                   width: 1200px;
+                   height:535px;
+                   border:1px solid #00f;
+                   margin:20px auto;
+                   position: relative;
+                   overflow: hidden;
+                   border-radius: 10px;
+                }
+                #flash>img{
+                  display: none;
+                  position: absolute;
+                  left: 0px;
+                  top:0px;
+                }
+                .back{
+                  position: absolute;
+                  top: 240px;
+                  z-index: 10;
+                  width: 40px;
+                  height: 40px;
+                  display: none;
+                }
+                #flash>div>img{
+                  width: 40px;
+                  height: 40px;
+                }
+                #flash ul{
+                  position: absolute;
+                  left: 568px;
+                  bottom: 23px;
+                }
+                #flash ul li{
+                  list-style: none;
+                  width: 12px;
+                  height: 12px;
+                  background: #DDDDDD;
+                  float: left;
+                  border-radius: 50%;
+                  margin-right: 8px;
+                }
+               </style>
+               
+ </head>
+ <body>
+     <div id="flash">
+        <img src='img1/l1.jpg' style="display: block;"/>
+        <img src='img1/l2.jpg' alt=""/>
+        <img src='img1/l3.jpg' alt=""/>
+        <img src='img1/l4.jpg' alt=""/>
+        <div class='back' style='left:10px'><img src='img1/back.png'></div>
+        <div class='back' style='right:10px'><img src='img1/next.png'></div>
+        <ul>
+          <li style="background: #A10000"></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+     </div>
+     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+ </body>
+ <script>
+  //小技巧：不同的途径控制相同的元素的效果，都通过大总管变量c来实现
+var c=0;//大总管变量
+//当鼠标滑进时显示左右按钮 划出时隐藏左右按钮
+$("#flash").hover(function(){
+  $('.back,.next').show();
+},function(){
+  $('.back,.next').hide();
+});
+//设置定时器，控制自动轮播
+var timer=setInterval(run,1000);
+  //定时器调用的函数
+  function run(){
+  c++;
+  c=c==4?0:c;
+  //让c号图片显示，兄弟图片隐藏
+  //$("#flash img").eq(c).show().siblings('img').hide();
+    //让c号图片淡入，兄弟图片淡出
+  $("#flash>img").eq(c).fadeIn(500).siblings('img').fadeOut(500);
+  //让c号li变红，其它变灰
+  $("#flash li").eq(c).css({'background':'#A10000'}).siblings('li').css({'background':'#DDDDDD'});
+};
+$("#flash").hover(function(){
+  //清除定时器
+  clearInterval(timer);
+},function(){
+ timer=setInterval(run,1000);
+});
+//鼠标移入小圆点的效果
+$("#flash ul li").mouseenter(function(){
+  //获得当前移入的li的序号
+  c=$(this).index();
+   //让c号图片淡入，兄弟图片淡出
+  $("#flash>img").eq(c).fadeIn(1000).siblings('img').fadeOut(1000);
+  //让c号li变红，其它变灰
+  $("#flash li").eq(c).css({'background':'#A10000'}).siblings('li').css({'background':'#DDDDDD'});
+});
+//点击左右按钮 切换图片
+$('.back').click(function(){
+  c=c==0?3:(c-1);
+  $("#flash>img").eq(c).fadeIn(1000).siblings('img').fadeOut(1000);
+  $("#flash li").eq(c).css({'background':'#A10000'}).siblings('li').css({'background':'#DDDDDD'});
+});
+$('.next').click(function(){
+  c=(c==3?0:(c+1));
+  $("#flash>img").eq(c).fadeIn(1000).siblings('img').fadeOut(1000);
+  $("#flash li").eq(c).css({'background':'#A10000'}).siblings('li').css({'background':'#DDDDDD'});
+})
+ </script>
+ </html>

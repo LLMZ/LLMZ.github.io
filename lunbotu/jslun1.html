@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+              <meta charset="UTF-8/">
+              <title>index</title>
+               <style>
+                    *{
+                      margin:0px;
+                      padding:0px;
+                    }
+               #flash{
+                   width: 1200px;
+                   height:535px;
+                   border:1px solid #00f;
+                   margin:20px auto;
+                   position: relative;
+                }
+                #flash img{
+                  display: none;
+                  position: absolute;
+                  left: 0px;
+                  top:0px;
+                }
+                #flash ul{
+                  position: absolute;
+                  left: 568px;
+                  bottom: 23px;
+                }
+                #flash ul li{
+                  list-style: none;
+                  width: 12px;
+                  height: 12px;
+                  background: #DDDDDD;
+                  float: left;
+                  border-radius: 50%;
+                  margin-right: 8px;
+                }
+               </style>
+               
+ </head>
+ <body>
+     <div id="flash">
+        <img src='img1/l1.jpg' style="display: block;"/>
+        <img src='img1/l2.jpg' alt=""/>
+        <img src='img1/l3.jpg' alt=""/>
+        <img src='img1/l4.jpg' alt=""/>
+        <ul>
+          <li style="background: #A10000"></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+     </div>
+ </body>
+ <script>
+var flash=document.getElementById("flash");
+var is=flash.getElementsByTagName('img');
+var ls=flash.getElementsByTagName('li');
+var c=0;
+setInterval(function(){
+  c++;
+  c=c==4?0:c;//三元表达式
+  //让所有的图片都隐藏 所有的li都变成灰色
+  for(var i=0;i<is.length;i++){
+    is[i].style.display='none';
+    ls[i].style.background='#DDDDDD';
+  }
+//让c号图片显示
+is[c].style.display='block';
+//让c号li边色
+ls[c].style.background='#A10000';
+},1000)
+ </script>
+ </html>
