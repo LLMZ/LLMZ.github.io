@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>柱形</title>
+    <style type="text/css">
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        #mycanvas{
+            margin-top: 20px;
+            background: antiquewhite;
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+<canvas id="mycanvas" width="300" height="300"></canvas>
+</body>
+<script>
+    //柱状图
+    var mycanvas=document.getElementById('mycanvas');
+    //使用画布的上下文
+    var ctx=mycanvas.getContext("2d");
+    //纵坐标轴
+    ctx.beginPath();//开始画线
+    ctx.moveTo(10,280);//将画笔移动到一个位置
+    ctx.lineTo(10,20);//用画笔画，此时是抽象的一个线，没有显示在画布上
+    //可多次使用lineTo
+    ctx.lineTo(5,30);
+    ctx.stroke();//真正的画线
+
+    ctx.beginPath();//开始画线
+    ctx.moveTo(10,20);//将画笔移动到一个位置
+    ctx.lineTo(15,30);//用画笔画，此时是抽象的一个线，没有显示在画布上
+    ctx.stroke();//真正的画线
+    //横坐标轴
+    ctx.beginPath();//开始画线
+    ctx.moveTo(10,280);//将画笔移动到一个位置
+    ctx.lineTo(280,280);//用画笔画，此时是抽象的一个线，没有显示在画布上
+    ctx.stroke();//真正的画线
+    ctx.lineTo(270,275);
+    ctx.stroke();
+
+    ctx.beginPath();//开始画线
+    ctx.moveTo(280,280);//将画笔移动到一个位置
+    ctx.lineTo(270,285);//用画笔画，此时是抽象的一个线，没有显示在画布上
+    ctx.stroke();//真正的画线
+    //画横线
+    function drawLines() {
+        var xs = 10;
+        var xe = 270
+        var ys = 280;
+        var i = 0;
+        for (i; i < 4; i++) {
+            ys -= 50;
+            ctx.beginPath();//开始-画线
+            ctx.moveTo(xs, ys);//将画笔移动到一个位置
+            ctx.lineTo(xe, ys);//用画笔画，此时是抽象的一个线，没有显示在画布上
+            ctx.strokeStyle = "#999";
+            ctx.stroke();//真正的画线
+        }
+    }
+    //画柱形
+    function drawColumnDiagram() {
+        var xl = -20;
+        var xr = 10;
+        var yb = 280;
+        var m = 0;
+        for (m; m < 6; m++) {
+            var dy = parseInt(Math.random() * 240)+40;   //y的变化值
+            var yf=280-dy;
+            console.log(dy)
+            console.log("---------");
+            console.log(yf);
+            xl +=40;
+            xr += 40;
+            ctx.beginPath();//开始画线
+            ctx.moveTo(xl, yb);//将画笔移动到一个位置
+            ctx.lineTo(xl, dy);//用画笔画，此时是抽象的一个线，没有显示在画布上
+            ctx.lineTo(xr, dy);
+            ctx.lineTo(xr, yb);
+            ctx.stroke();//真正的画线
+            ctx.fillStyle = "red";
+            ctx.fill();
+        }
+    }
+        // initChart(); // 图表初始化
+        // drawLineLabelMarkers(); // 绘制图表轴、标签和标记
+        // drawLineAnimate(); // 绘制折线图的动画
+
+        //点击刷新图表
+        drawLines();
+        drawColumnDiagram();
+
+</script>
+</html>
