@@ -15,31 +15,33 @@
             border: 1px solid;
         }
         #lm {
-            font-size: 30px;
+            font-size: 2vw;
             color: #fff;
             position: fixed;
             top: 0px;
         }
         .mgs{
-            font-size: 20px;
-            line-height: 30px;
+            font-size: 2vw;
+            line-height: 5vh;
             display: flex;
-            margin-top: 40px;
+            margin-top: 10vh;
             width: 680px;
         }
         .top-img{
             width: 100vw;
-            height: 150px;
-            font-size: 36px;
-            line-height: 180px;
+            height: 26vh;
+            font-size: 2vw;
+            line-height: 26vh;
             background-image:url(../img-test/lm5.jpg) ;
         }
         .top-img>h2{
             line-height: 160px;
             margin: auto;
         }
-        #change{
-            margin-left: 1000px;
+        .imgUrl{
+            width: 50vw;
+            height: 62vh;
+            margin-top: 5vh;
         }
     </style>
 </head>
@@ -51,7 +53,7 @@
         <div class="top-img">happy birthday</div>
         <audio src="../audio/lm2.mp3" autoplay="autoplay" loop  > </audio>
         <div>
-            <img v-if="isShow"  :src="imgUrl">
+            <img v-if="isShow" class="imgUrl" :src="imgUrl">
             <div v-else id="lm-font">
                 <p class="mgs">{{mgs1}}</p>
                 <p class="mgs">{{mgs2}}</p>
